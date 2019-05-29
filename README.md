@@ -1,4 +1,4 @@
-#Tequita - the littlest library system
+# Tequita - the littlest library system
 The main purposes of this project are to:
 * refresh my programming skills.
 * learn how to use CakePHP.
