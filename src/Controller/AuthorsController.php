@@ -36,4 +36,11 @@ class AuthorsController extends AppController {
         // pass all the data from the authors table along to the Template
         $this->set(compact('authors'));
     }
+    
+    // view() action
+    public function view($id = null)
+    {
+        $author = $this->Authors->get($id);
+        $this->set(compact('author'));
+    }
 }
