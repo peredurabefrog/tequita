@@ -5,6 +5,8 @@
     <tr>
         <th>Last Name(s)</th>
         <th>First Names(s)</th>
+        <th>Date of Birth</th>
+        <th>Date of Death</th>
         <th>Created</th>
         <th>Last modified</th>
     </tr>
@@ -18,6 +20,12 @@
         </td>
         <td>
             <?= $author->other_names ?>
+        </td>
+        <td>
+            <?= $author->dob ?>
+        </td>
+        <td>
+            <?= $author->dod ?>
         </td>
         <td>
             <?= $author->created->format(DATE_RFC850) ?> 
