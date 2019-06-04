@@ -26,21 +26,56 @@ namespace App\Controller;
  * @author peter
  */
 class AuthorsController extends AppController {
-    public function index()
+    public function initialize()
     {
+        parent::initialize();
+
         $this->loadComponent('Paginator');
-        
+        $this->loadComponent('Flash'); // Include the FlashComponent
+    }
+    
+    // index() action - list all authors (paginated)
+    public function index()
+    {   
         // retrieve the contents of the authors table
-        $authors = $this->Paginator->paginate($this->Authors->find());
+        $authors = $this->Paginator->paginate($this->Authors->find()->order(['surname' => 'ASC', 'other_names' => 'ASC']));
         
         // pass all the data from the authors table along to the Template
         $this->set(compact('authors'));
     }
     
-    // view() action
+    // view() action - view details of a single author
     public function view($id = null)
     {
         $author = $this->Authors->get($id);
         $this->set(compact('author'));
+    }
+    
+    // add() action - add a new author into the authors table
+    public function add()
+    {
+        $author = $this->Authors->newEntity();
+        if ($this->request->is('post'))
+        {
+            $data = $this->request->getData();
+            
+            // try to retrieve an existing author with this data
+            if (!$this->Authors->find()
+                    ->where(['surname' => $data['surname'], 
+                        'other_names' => $data['other_names'],
+                        'birth' => $data['birth'],
+                        'death' => $data['death']])
+                    ->first())
+            {
+                // the author does not already exist
+                // so add the new author
+                $this->Authors->patchEntity($author, $data);
+            }
+            else
+            {
+                // the author already exists
+                // so print an error message
+            }
+        }
     }
 }

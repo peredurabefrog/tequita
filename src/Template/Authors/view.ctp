@@ -4,4 +4,12 @@
     $fullName = $author->surname . ', ' . $author->other_names;
 ?>
 
-// TODO: list the remaining fields defining an author
+<h1><?= h($fullName) ?></h1>
+<p><b>Year of birth:</b> <?= $author->birth ?></p>
+<p><b>Year of death:</b> <?= $author->death ?></p>
+<p>
+    <small>Created: <?= $author->created->format(DATE_RFC850) ?> | Last modified: <?= $author->modified->format(DATE_RFC850) ?></small>
+</p>
+<p>
+        <?= $this->Html->link('Edit', ['action' => 'edit', $author->id]) ?>
+</p>
