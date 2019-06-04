@@ -59,23 +59,42 @@ class AuthorsController extends AppController {
         {
             $data = $this->request->getData();
             
+            $whereArray = array('surname' => $data['surname'],
+                'other_names' => $data['other_names']);
+            
+            if ($data['birth'])
+            {
+                $whereArray['birth'] = $data['birth'];
+            }
+            
+            if ($data['death'])
+            {
+                $whereArray['death'] = $data['death'];
+            }
+            
             // try to retrieve an existing author with this data
             if (!$this->Authors->find()
-                    ->where(['surname' => $data['surname'], 
-                        'other_names' => $data['other_names'],
-                        'birth' => $data['birth'],
-                        'death' => $data['death']])
+                    ->where($whereArray)
                     ->first())
             {
                 // the author does not already exist
                 // so add the new author
                 $this->Authors->patchEntity($author, $data);
+                
+                if ($this->Authors->save($author)) 
+                {
+                    $this->Flash->success(__('The new author data has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('Unable to add your article.'));
             }
             else
             {
                 // the author already exists
                 // so print an error message
+                $this->Flash->error(__('This author already exists.'));
             }
         }
+        $this->set('author', $author);
     }
 }

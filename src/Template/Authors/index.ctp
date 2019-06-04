@@ -1,6 +1,7 @@
 <!-- src/Template/Authors/index.ctp -->
 
 <h1>Authors</h1>
+<?= $this->Html->link('Add Author', ['action' => 'add']) ?>
 <table>
     <tr>
         <th>Last Name(s)</th>
