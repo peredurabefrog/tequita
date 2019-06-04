@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 03-06-2019 a las 22:57:46
+-- Tiempo de generación: 04-06-2019 a las 17:44:21
 -- Versión del servidor: 5.7.26-0ubuntu0.19.04.1
 -- Versión de PHP: 7.2.17-0ubuntu0.19.04.1
 
@@ -30,8 +30,8 @@ CREATE TABLE `authors` (
   `id` int(10) UNSIGNED NOT NULL,
   `surname` varchar(255) NOT NULL,
   `other_names` varchar(255) DEFAULT NULL,
-  `birth` year(4) DEFAULT NULL,
-  `death` year(4) DEFAULT NULL,
+  `birth` char(4) DEFAULT NULL,
+  `death` char(4) DEFAULT NULL,
   `place_of_birth` varchar(255) NOT NULL DEFAULT 'unknown',
   `place_of_death` varchar(255) NOT NULL DEFAULT 'unknown',
   `created` datetime NOT NULL,
@@ -43,7 +43,9 @@ CREATE TABLE `authors` (
 --
 
 INSERT INTO `authors` (`id`, `surname`, `other_names`, `birth`, `death`, `place_of_birth`, `place_of_death`, `created`, `modified`) VALUES
-(1, 'Ramsden', 'Herbert', 1927, 2011, 'unknown', 'unknown', '2019-06-03 22:53:00', '2019-06-03 22:53:00');
+(1, 'Ramsden', 'Herbert', '1927', '2011', 'unknown', 'unknown', '2019-06-03 22:53:00', '2019-06-03 22:53:00'),
+(2, 'Rowling', 'Joanne K.', '1965', NULL, 'unknown', 'unknown', '2019-06-04 15:27:05', '2019-06-04 15:27:05'),
+(7, 'Christie', 'Agatha Mary Clarissa', '1890', '1976', 'Torquay, Devon', 'Winterbrook, Oxfordshire', '2019-06-04 16:31:16', '2019-06-04 16:31:16');
 
 --
 -- Índices para tablas volcadas
@@ -63,7 +65,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT de la tabla `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
